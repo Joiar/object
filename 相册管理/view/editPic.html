@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./Public/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./Public/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="./Public/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="./Public/js/bootstrap.js"></script>
+</head>
+<body>
+<!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" onclick="resets();" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">相册修改</h4>
+      </div>
+      <form action="./index.php?a=editPic" method="post" enctype='multipart/form-data'>
+      <?php foreach($res as $val):?> 
+      <div class="modal-body">
+      <input type="hidden" name="id" value="<?php echo $val['id']?>">
+        封面图片:<input type="file" name="pic[]"><br>
+        相册名称:<input type="text" name="name" value="<?php echo $val['name']?>"><br>
+       <!--  相册密码:<input type="password" name="pass" value="<?php echo $val['pass'];?>"><br>
+        是否公开:<select name="status">
+		        	<option value="1" <?php if($val['status'] == 1) echo 'selected';?>>公开</option>
+		        	<option value="0" <?php if($val['status'] == 0) echo 'selected';?>>私密</option>
+        		</select> -->
+      </div>
+    <?php endforeach;?>
+        <div class="modal-footer">
+        <input type="button" class="btn btn-default" data-dismiss="modal" onclick="resets();" value='取消'>
+        <input type="submit" class="btn btn-default" value='保存'>
+      </div>
+      </form>
+    </div>
+  </div>
+<!-- </div> -->
+</html>
+<script type="text/javascript">
+  function resets()
+  { 
+    window.location.href = './index.php?a=createPic';
+  }
+</script>

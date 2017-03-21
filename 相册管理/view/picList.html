@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./Public/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./Public/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="./Public/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="./Public/js/bootstrap.js"></script>
+</head>
+<body>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+添加相册
+</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">相册添加</h4>
+      </div>
+      <form action="./index.php?a=createPic" method="post" enctype='multipart/form-data'> 
+      <div class="modal-body">
+      	相册封面:<input type="file"  name="image[]"><br>
+        相册名称:<input type="text" name="name"><br><br>
+      </div>
+        <div class="modal-footer">
+        <input type="submit" class="btn btn-default" data-dismiss="modal" value='取消'>
+        <input type="submit" class="btn btn-default" value='保存'>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+<?php if(!empty($picList)) foreach($picList as $val):?>
+	<table  style=" float:left;margin:8px;"> 
+	  	<tr>
+	  		<td><a href="./index.php?a=imageList&picid=<?php echo $val['id'];?>"><img width="150" height="150" src="<?php echo $val['image']?>" class="img-thumbnail"></a></td>
+	  	</tr>
+	  	<tr>
+	  		<td><?php echo $val['name']?>
+	  		|
+      <a class="btn btn-default btn-xs"  href="./index.php?a=editPic&id=<?php echo $val['id']?>">编辑</a>
+	  		|
+			<a class="btn btn-default btn-xs" href="./index.php?a=delPic&id=<?php echo $val['id']?>">删除</a></td>
+	  	</tr>
+	</table>
+<?php endforeach;?>
+<div style="clear: both;">
+    <ul class="pager">
+        <?php echo $btn;?>
+    </ul>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+  $('.pager').find('a').wrap('<li></li>');
+</script>
